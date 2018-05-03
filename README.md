@@ -1,59 +1,44 @@
+# Readme:
 
-[All] Make GitHub accounts
-Josh: Figure out formatting of code layout
-Penny: Arrange team meetings
-Toby, Ben: Get basic build of AV planned/put together
-Max: Set up GitHub
+### Week 1:
 
+- [x] **[All]**: Make GitHub accounts and get plan done
+- [ ] Josh: Figure out formatting of code layout
+- [ ] Penny: Arrange team meetings
+- [ ] Toby, Ben: Get basic build of AV planned/put together
+- [x] Max: Set up GitHub
+- [ ] Ben: Make GitHub account
 
-Build something that moves/senses 
+### Week 2:
 
-Josh: Code basic movement into AV
-Toby, Ben: Refine build of AV
-Penny:Get everyone organised and plan for next week
-Max: Update GitHub with developments
+- [ ] **[All]**: Book CO242A every Thursday
+- [ ] Josh: Code basic movement into AV
+- [ ] Toby, Ben: Refine build of AV
+- [ ] Penny: Get everyone organised and plan for next week
+- [ ] Max: Update GitHub with developments
 
-Make the AV able to follow a white line
+### Week 3:
 
+- [ ] Josh: Program networking capabilities and maze exploration.
+- [ ] Penny: Assess team member progress, organise team meeting and plan for next week. Bug testing and debugging code.
+- [ ] Max: Update GitHub with development and check over AV design
+- [ ] Toby, Ben: Continue development on the overall design
 
-COMP102/112 Test
-Josh: 
-Penny: 
-Max: 
-Toby, Ben: Finalise AV build
+### Week 4:
 
+- [ ] Josh: Ensure AV can complete course, finalise and optimise code.
+- [ ] Penny: Assessing full team progress against expected results. Implement changes. Bug testing and debugging code.
+- [ ] Max:Update GitHub with development and test AV thoroughly in maze
+- [ ] Toby, Ben: Finalise AV build
 
-Week 4
-21st May
-Make the AV able to get through a maze
-AVC Progress Report
-ENGR121 Test
+### Week 5:
 
+- [ ] **[All]**: Put results in report
 
-Week 5
-28th May
-Report writing
-AVC Testing
+### Week 6:
 
+- [ ] **[All]**: Continue writing report
 
+### Week 7:
 
-
-Week 6
-4th June
-Report writing
-
-
-ENGR101 Test
-
-
-Week 7
-11th June
-
-
-AVC Final Report
-
-
-
-
-
-
+- [ ] **[All]**: Hand in report
