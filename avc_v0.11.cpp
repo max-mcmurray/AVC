@@ -5,12 +5,6 @@
 #include <time.h>
 #include "E101.h"
 
-int leftMotor = 1;
-int rightMotor = 2;		// May be wrong way around
-int rowToScan = 120;
-int max = 0;
-int min = 255;
-
 //main method. determines which method to call
 void main()
 {
@@ -23,102 +17,58 @@ void openStartGate()
 }
 
 //finds where the white line is and calls methods to move the AV stay on the line
-
-//written by Joshua Hindley
-void detectLine()
+//written by Toby Stayner
+void detectLine(x_pixels, y, white_boundary) //x_pixels: how many pixels to scan in one row - must produce a integer when 320/row_pixels
 {
 	take_picture();
-	for(int i = 0; i < 320; i++)
-	{
-		int pix = get_pixel(i, rowToScan, 3);
-		if(pix > min)
-			min = pix;
-		if(pix < max)
-			max = pix;
-	}
-	int threshold = (max + minimum) / 2;
-	int weight = -160;
-	int amountToTurn = 0;
-	for(int i  = 0; i < 320; i++)
-	{
-		int pixelValue = get_pixel(rowToScan, i, 3);
-		amountToTurn += (weight * pixelValue)
-		weight++;
-		if(weight == 0)
-			weight = 1;
-	}
-
-}
-void detectLineToby(x_pixels, y, white_boundary) //x_pixels: how many pixels to scan in one row - must produce a integer when 320/row_pixels
-{
-	take_picture();
+	int total = 0;
+	int count = 0;
 	for(int i = 0; i < x_pixels; i++)
 	{
 		int x = i*320/x_pixels;
-		//unsigned char red = get_pixel(x, y, 0);
-		//unsigned char green = get_pixel(x, y, 1);
-		//unsigned char blue = get_pixel(x, y, 2);
 		unsigned char white = get_pixel(x, y, 3);
 		if(white > white_boundary)
 		{
-			//array	
+			total += x;
+			count++;
 		}
-		
 	}
-	int total = 0
-	for(int num i++)
+	if(count==0)
 	{
-		total += num
+		return -1; //returns -1, meaning that it cannot find a white line
 	}
-	white_average = total/i
+	else
+	{
+		double x_average = total/count;
+		return (int) x_average; //returns where the white line is, rounded
+	}
+	
+}
+
 //moves the AV forward
 //written by Joshua Hindley
 void goForward(int sec, int microsec, double speed)
 {
-	set_motor(leftMotor, speed);
-	set_motor(rightMotor, speed);
-	
+	set_motor(1, speed);
+	set_motor(2, speed);
 	sleep1(sec, microsec);
-	
-	set_motor(leftMotor, 0);
-	set_motor(rightMotor, 0);
+	set_motor(1, 0);
+	set_motor(2, 0);
 }
 
-//turns the AV left by moving one wheel
-//written by Ben Robertson
+//turns the AV left while moving forward
 void turnLeft(int sec, int microsec, double speed)
 {
-	set_motor(leftMotor, 0);
-	set_motor(rightMotor, speed);
-	
-	sleep1(sec, microsec);
-
-	set_motor(rightMotor, 0);
 }
 
-//turns the AV right by moving one wheel
-//written by Joshua Hindley
+//turns the AV right while moving forward
 void turnRight(int sec, int microsec, double speed)
 {
-	set_motor(leftMotor, speed);
-	set_motor(rightMotor, 0);
-	
-	sleep1(sec, microsec);
-	
-	set_motor(leftMotor, 0);
 }
 
 //pivots the AV to the left at a point
-//written by Joshua Hindley
 void pivotLeft(int sec, int microsec, double speed)
 {
-	set_motor(leftMotor, -speed);
-	set_motor(rightMotor, speed);
-	
-	sleep1(sec, microsec);
-	
-	set_motor(leftMotor, 0);
-	set_motor(rightMotor, 0);
 }
 
 //pivots the AV to the right at a point
