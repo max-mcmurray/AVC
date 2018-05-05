@@ -37,7 +37,7 @@ void goForward(int sec, int microsec, double speed)
 	set_motor(rightMotor, 0);
 }
 
-//turns the AV left while moving forward
+//turns the AV left by moving one wheel
 //written by Ben Robertson
 void turnLeft(int sec, int microsec, double speed)
 {
@@ -45,14 +45,19 @@ void turnLeft(int sec, int microsec, double speed)
 	set_motor(rightMotor, speed);
 	
 	sleep1(sec, microsec);
-	
-	set_motor(leftMotor, 0);
+
 	set_motor(rightMotor, 0);
 }
 
-//turns the AV right while moving forward
+//turns the AV right by moving one wheel
 void turnRight(int sec, int microsec, double speed)
 {
+	set_motor(leftMotor, speed);
+	set_motor(rightMotor, 0);
+	
+	sleep1(sec, microsec);
+	
+	set_motor(leftMotor, 0);
 }
 
 //pivots the AV to the left at a point
