@@ -4,8 +4,8 @@
 
 - [x] **[All]**: Make GitHub accounts and get plan done
 - [x] Josh: Determine formatting for AV code
-- [ ] Penny: Arrange team meetings
-- [ ] Penny: Make draft of plan into the final copy
+- [x] Penny: Arrange team meetings
+- [x] Penny: Make draft of plan into the final copy
 - [ ] Toby, Ben: Get basic build of AV planned/put together
 - [x] Max: Set up GitHub
 - [x] Ben: Make GitHub account
