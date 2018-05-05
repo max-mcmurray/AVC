@@ -23,6 +23,7 @@ void openStartGate()
 }
 
 //finds where the white line is and calls methods to move the AV stay on the line
+//written by Joshua Hindley
 void detectLine()
 {
 	take_picture();
@@ -33,6 +34,17 @@ void detectLine()
 			min = pix;
 		if(pix < max)
 			max = pix;
+	}
+	int threshold = (max + minimum) / 2;
+	int weight = -160;
+	int amountToTurn = 0;
+	for(int i  = 0; i < 320; i++)
+	{
+		int pixelValue = get_pixel(rowToScan, i, 3);
+		amountToTurn += (weight * pixelValue)
+		weight++;
+		if(weight == 0)
+			weight = 1;
 	}
 }
 
