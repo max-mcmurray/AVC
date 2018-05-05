@@ -22,6 +22,7 @@ void detectLine()
 }
 
 //moves the AV forward
+//written by Joshua Hindley
 void goForward(int sec, int microsec, double speed)
 {
 	set_motor(1, speed);
