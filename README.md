@@ -8,7 +8,7 @@
 - [ ] Penny: Make draft of plan into the final copy
 - [ ] Toby, Ben: Get basic build of AV planned/put together
 - [x] Max: Set up GitHub
-- [ ] Ben: Make GitHub account
+- [x] Ben: Make GitHub account
 
 ### Week 2:
 
