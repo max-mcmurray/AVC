@@ -8,3 +8,5 @@
 - Penny improved plan
 - Josh wrote detectLine
 - Toby wrote detectLineToby
+- Josh wrote turnRight
+- Josh wrote pivotLeft
