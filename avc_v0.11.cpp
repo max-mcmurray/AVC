@@ -50,6 +50,7 @@ void turnLeft(int sec, int microsec, double speed)
 }
 
 //turns the AV right by moving one wheel
+//written by Joshua Hindley
 void turnRight(int sec, int microsec, double speed)
 {
 	set_motor(leftMotor, speed);
