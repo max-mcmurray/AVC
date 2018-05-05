@@ -5,6 +5,9 @@
 #include <time.h>
 #include "E101.h"
 
+int leftMotor = 1;
+int rightMotor = 2;		// May be wrong way around
+
 //main method. determines which method to call
 void main()
 {
@@ -33,8 +36,16 @@ void goForward(int sec, int microsec, double speed)
 }
 
 //turns the AV left while moving forward
+//written by Ben Robertson
 void turnLeft(int sec, int microsec, double speed)
 {
+	set_motor(leftMotor, 0);
+	set_motor(rightMotor, speed);
+	
+	sleep1(sec, microsec);
+	
+	set_motor(leftMotor, 0);
+	set_motor(rightMotor, 0);
 }
 
 //turns the AV right while moving forward
