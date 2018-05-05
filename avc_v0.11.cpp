@@ -30,7 +30,7 @@ void detectLine()
 	take_picture();
 	for(int i = 0; i < 320; i++)
 	{
-		int pix = get_pixel(rowToScan, i, 3);
+		int pix = get_pixel(i, rowToScan, 3);
 		if(pix > min)
 			min = pix;
 		if(pix < max)
