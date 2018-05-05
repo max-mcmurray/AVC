@@ -1,6 +1,6 @@
 //This program is the intellectual property of TriTeam.
 //This program was programmed by Joshua Hindley, Ben Robertson, Max McMurray, Penny Peneueta and Toby Stayner
-//HI
+
 #include <stdio.h>
 #include <time.h>
 #include "E101.h"
@@ -28,11 +28,13 @@ void detectLine()
 //written by Joshua Hindley
 void goForward(int sec, int microsec, double speed)
 {
-	set_motor(1, speed);
-	set_motor(2, speed);
+	set_motor(leftMotor, speed);
+	set_motor(rightMotor, speed);
+	
 	sleep1(sec, microsec);
-	set_motor(1, 0);
-	set_motor(2, 0);
+	
+	set_motor(leftMotor, 0);
+	set_motor(rightMotor, 0);
 }
 
 //turns the AV left while moving forward
