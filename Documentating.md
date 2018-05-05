@@ -5,4 +5,6 @@
 - Josh created makefile
 - Changed GitHub to use one branch
 - Ben wrote turnLeft
-- 
+- Penny improved plan
+- Josh wrote detectLine
+- Toby wrote detectLineToby
