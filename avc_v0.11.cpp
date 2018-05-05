@@ -23,6 +23,7 @@ void openStartGate()
 }
 
 //finds where the white line is and calls methods to move the AV stay on the line
+
 //written by Joshua Hindley
 void detectLine()
 {
@@ -46,8 +47,30 @@ void detectLine()
 		if(weight == 0)
 			weight = 1;
 	}
-}
 
+}
+void detectLineToby(x_pixels, y, white_boundary) //x_pixels: how many pixels to scan in one row - must produce a integer when 320/row_pixels
+{
+	take_picture();
+	for(int i = 0; i < x_pixels; i++)
+	{
+		int x = i*320/x_pixels;
+		//unsigned char red = get_pixel(x, y, 0);
+		//unsigned char green = get_pixel(x, y, 1);
+		//unsigned char blue = get_pixel(x, y, 2);
+		unsigned char white = get_pixel(x, y, 3);
+		if(white > white_boundary)
+		{
+			//array	
+		}
+		
+	}
+	int total = 0
+	for(int num i++)
+	{
+		total += num
+	}
+	white_average = total/i
 //moves the AV forward
 //written by Joshua Hindley
 void goForward(int sec, int microsec, double speed)
