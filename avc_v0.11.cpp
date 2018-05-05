@@ -62,8 +62,16 @@ void turnRight(int sec, int microsec, double speed)
 }
 
 //pivots the AV to the left at a point
+//written by Joshua Hindley
 void pivotLeft(int sec, int microsec, double speed)
 {
+	set_motor(leftMotor, -speed);
+	set_motor(rightMotor, speed);
+	
+	sleep1(sec, microsec);
+	
+	set_motor(leftMotor, 0);
+	set_motor(rightMotor, 0);
 }
 
 //pivots the AV to the right at a point
