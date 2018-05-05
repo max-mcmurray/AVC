@@ -16,12 +16,39 @@ void openStartGate()
 {
 }
 
-//follows the curvy white line, completing the second quadrant
-void followLine()
+//finds where the white line is and calls methods to move the AV stay on the line
+void detectLine()
 {
 }
 
-//follows the line to solve the line maze, completing the third quadrant
+//moves the AV forward
+void goForward(int sec, int microsec, double speed)
+{
+}
+
+//turns the AV left while moving forward
+void turnLeft(int sec, int microsec, double speed)
+{
+}
+
+//turns the AV right while moving forward
+void turnRight(int sec, int microsec, double speed)
+{
+}
+
+//pivots the AV to the left at a point
+void pivotLeft(int sec, int microsec, double speed)
+{
+}
+
+//pivots the AV to the right at a point
+void pivotRight(int sec, int microsec, double speed)
+{
+}
+
+
+//follows the line to solve the line maze detecting the line
+//and using an algorithm to complete the third quadrant
 void navigateLineMaze()
 {
 }
