@@ -7,6 +7,9 @@
 
 int leftMotor = 1;
 int rightMotor = 2;		// May be wrong way around
+int rowToScan = 120;
+int max = 0;
+int min = 255;
 
 //main method. determines which method to call
 void main()
@@ -22,6 +25,15 @@ void openStartGate()
 //finds where the white line is and calls methods to move the AV stay on the line
 void detectLine()
 {
+	take_picture();
+	for(int i = 0; i < 320; i++)
+	{
+		int pix = get_pixel(rowToScan, i, 3);
+		if(pix > min)
+			min = pix;
+		if(pix < max)
+			max = pix;
+	}
 }
 
 //moves the AV forward
