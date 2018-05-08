@@ -7,6 +7,9 @@
 
 int leftMotor = 1;
 int rightMotor = 2;		// May be wrong way around
+double defaultSpeed = 0.5;
+int defaultSec = 0;
+int defaultMicroSec  = 100000 	//100ms or 0.1 seconds 
 int rowToScan = 120;
 int max = 0;
 int min = 255;
@@ -27,25 +30,32 @@ void openStartGate()
 //written by Joshua Hindley
 void detectLine()
 {
-	take_picture();
-	for(int i = 0; i < 320; i++)
+	while(true)
 	{
-		int pix = get_pixel(i, rowToScan, 3);
-		if(pix > min)
-			min = pix;
-		if(pix < max)
-			max = pix;
-	}
-	int threshold = (max + minimum) / 2;
-	int weight = -160;
-	int amountToTurn = 0;
-	for(int i  = 0; i < 320; i++)
-	{
-		int pixelValue = get_pixel(rowToScan, i, 3);
-		amountToTurn += (weight * pixelValue)
-		weight++;
-		if(weight == 0)
-			weight = 1;
+		take_picture();
+		for(int i = 0; i < 320; i++)
+		{
+			int pix = get_pixel(i, rowToScan, 3);
+			if(pix > min)
+				min = pix;
+			if(pix < max)
+				max = pix;
+		}
+		int threshold = (max + minimum) / 2;
+		int weight = -160;
+		int amountToTurn = 0;
+		for(int i  = 0; i < 320; i++)
+		{
+			int pixelValue = get_pixel(rowToScan, i, 3);
+			if(pixelValue < threshold)
+				pixelValue = 0;
+			else
+				pixelValue = 1;
+			amountToTurn += (weight * pixelValue);
+			weight++;
+			if(weight == 0)
+				weight = 1;
+		}
 	}
 
 }
@@ -71,14 +81,16 @@ void detectLineToby(x_pixels, y, white_boundary) //x_pixels: how many pixels to 
 		total += num
 	}
 	white_average = total/i
+}
+
 //moves the AV forward
 //written by Joshua Hindley
-void goForward(int sec, int microsec, double speed)
+void goForward()
 {
-	set_motor(leftMotor, speed);
-	set_motor(rightMotor, speed);
+	set_motor(leftMotor, defaultSpeed);
+	set_motor(rightMotor, defaultSpeed);
 	
-	sleep1(sec, microsec);
+	sleep1(defaultSec, defaulyMicroSec);
 	
 	set_motor(leftMotor, 0);
 	set_motor(rightMotor, 0);
@@ -88,7 +100,7 @@ void goForward(int sec, int microsec, double speed)
 //written by Ben Robertson
 void turnLeft(int sec, int microsec, double speed)
 {
-	set_motor(leftMotor, 0);
+	set_motor(leftMotor, defaultSpeed);
 	set_motor(rightMotor, speed);
 	
 	sleep1(sec, microsec);
@@ -101,7 +113,7 @@ void turnLeft(int sec, int microsec, double speed)
 void turnRight(int sec, int microsec, double speed)
 {
 	set_motor(leftMotor, speed);
-	set_motor(rightMotor, 0);
+	set_motor(rightMotor, defaultSpeed);
 	
 	sleep1(sec, microsec);
 	
@@ -122,8 +134,16 @@ void pivotLeft(int sec, int microsec, double speed)
 }
 
 //pivots the AV to the right at a point
+//written by Joshua Hindley
 void pivotRight(int sec, int microsec, double speed)
 {
+	set_motor(leftMotor, speed);
+	set_motor(rightMotor, -speed);
+	
+	sleep1(sec, microsec);
+	
+	set_motor(leftMotor, 0);
+	set_motor(rightMotor, 0);
 }
 
 
