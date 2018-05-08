@@ -131,11 +131,33 @@ void pivotRight(int sec, int microsec, double speed)
 //and using an algorithm to complete the third quadrant
 void navigateLineMaze()
 {
+	
 }
 
 //follows the left/right wall of the maze, completing the final quadrant
+//written by Toby Stayner
+// in progress - follows left side of the maze needs more information
 void navigateWalledMaze()
 {
+	int distanceThreshold = 300; //may need to change this and create different thresholds for left and right- TEST THIS
+	int adc_reading_left = read_analog(0);
+	int adc_reading_front = read_analog(1);
+	int adc_reading_right = read_analog(2);
+	if(adc_reading_left > distanceThreshold){ // if there is a space to the left, turn left
+		pivotLeft(); //need timings 
+		goForward(); // go forward 1 section (grid e.g. 18cm by 18 cm)- TEST THIS
+	}
+	else if(adc_reading_front > distanceThreshold){ // do this if can't go left
+		goForward(); 
+	}
+	else if(adc_reading_right > distance Threshold){ // do this if only valid space is to the right
+		pivotRight();
+		goForward();
+	}
+	else{ // do this when reaching a dead end
+		pivotRight();
+		pivotRight();
+	}
 }
 
 //waits for the gate in the walled maze to open and goes through it when does
