@@ -3,16 +3,22 @@
 
 #include <stdio.h>
 #include <time.h>
+#include <exception>
 #include "E101.h"
 
 int leftMotor = 1;
 int rightMotor = 2;		// May be wrong way around
-int defaultSpeed = -127;
+int defaultSpeed = -20;
 int defaultSec = 0;
-int defaultMicroSec  = 100000; 	//100ms or 0.1 seconds 
-int rowToScan = 120;
+int defaultMicroSec  = 5000; 	//100ms or 0.1 seconds 
+int rowToScan = 119;
 int max = 0;
 int min = 255;
+int timesToRun = 4500;
+
+void turnLeft(int sec, int microsec, double speed);
+void turnRight(int sec, int microsec, double speed);
+void goForward();
 
 //opens the gate at the start of the course, completing the first quadrant
 void openStartGate()
@@ -23,19 +29,21 @@ void openStartGate()
 //written by Joshua Hindley
 void detectLine()
 {
-	while(true)
+	//try{
+	int times = 0;
+	while(times < timesToRun)
 	{
 		int speed = defaultSpeed;
 		take_picture();
 		for(int i = 0; i < 320; i++)
 		{
-			int pix = get_pixel(i, rowToScan, 3);
+			int pix = get_pixel(rowToScan, i, 3);
 			if(pix > min)
 				min = pix;
 			if(pix < max)
 				max = pix;
 		}
-		int threshold = (max + minimum) / 2;
+		int threshold = (max + min) / 2;
 		int weight = -160;
 		double amountToTurn = 0;
 		for(int i  = 0; i < 320; i++)
@@ -50,26 +58,35 @@ void detectLine()
 			if(weight == 0)
 				weight = 1;
 		}
-		if(amountToTurn <= 10 && amountToTurn >= -10)
+		if(amountToTurn <= 7 && amountToTurn >= -7)
 			goForward();
-		else if(amountToTurn > 10) //turn to the right
+		else if(amountToTurn > 7) //turn to the right
 		{	//left motor needs to speed up
-			amountToTurn *= 0.1;
-			if(amountToTurn > 128)
-				amountToTurn = 128;
-			speed -= amountToTurn; //can decrease by up to 128
-			turnLeft();
+			//amountToTurn *= 0.1;
+			//if(amountToTurn > 128)
+				//amountToTurn = 128;
+			speed -= 10;//amountToTurn; //can decrease by up to 128
+			turnRight(defaultSec, defaultMicroSec, speed);
 		}
 		else //turn to the left
 		{	//right motor needs to speed up
-			amountToTurn = -amountToTurn;
-			amountToTurn *= 0.1;
-			if(amountToTurn > 128)
-				amountToTurn = 128;
-			speed -= amountToTurn; //can decrease up to 128
-			turnRight();
+			//amountToTurn = -amountToTurn;
+			//amountToTurn *= 0.1;
+			//if(amountToTurn > 128)
+				//amountToTurn = 128;
+			speed -= 10;//amountToTurn; //can decrease up to 128
+			turnLeft(defaultSec, defaultMicroSec, speed);
 		}
+		times++;
 	}
+	set_motor(leftMotor, 0);
+	set_motor(rightMotor, 0);
+//}
+//catch(exception e)
+//{
+	//set_motor(leftMotor, 0);
+	//set_motor(rightMotor, 0);
+//}
 }
 
 //moves the AV forward
@@ -81,8 +98,8 @@ void goForward()
 	
 	sleep1(defaultSec, defaultMicroSec);
 	
-	set_motor(leftMotor, 0);
-	set_motor(rightMotor, 0);
+	//set_motor(leftMotor, 0);
+	//set_motor(rightMotor, 0);
 }
 
 //turns the AV left by moving one wheel
@@ -94,7 +111,8 @@ void turnLeft(int sec, int microsec, double speed)
 	
 	sleep1(sec, microsec);
 
-	set_motor(rightMotor, 0);
+	//set_motor(rightMotor, 0);
+	//set_motor(leftMotor, 0);
 }
 
 //turns the AV right by moving one wheel
@@ -106,7 +124,8 @@ void turnRight(int sec, int microsec, double speed)
 	
 	sleep1(sec, microsec);
 	
-	set_motor(leftMotor, 0);
+	//set_motor(leftMotor, 0);
+	//set_motor(rightMotor, 0);
 }
 
 //pivots the AV to the left at a point
