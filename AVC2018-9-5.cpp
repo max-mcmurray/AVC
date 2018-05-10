@@ -15,6 +15,8 @@ int defaultMicroSec  = 5000; 	//5ms or 0.1 seconds
 int reverseMicroSec = 500000;
 int rowToScan = 119;
 int columnToScan = SENDHELP;//whoops
+int height = HUFHUEFHIEHFIHFIOEF;
+int width = mmmmmmmmowommmmmm;//***********************
 int max = 0;
 int min = 255;
 int timesToRun = 4500;
@@ -115,18 +117,57 @@ void detectLine()
 //For the third quadrent written by Max <3
 void lineMaze() {
 	int times = 0;
+	//0 = top line. Concerent numbers go clockwise
+	int maxs[4] = {0, 0, 0, 0};
+	int mins[4] = {255, 255, 255, 255};
 	while (times < timesToRun){
 		
 		takePicture();
-		for (int pixel = 0; pixel < 320; pixel++){
-			int pixelValue = get_pixel(rowToScan, pixel, 3);
-			if (pixelValue < min) {
-				min = pixelValue;
+		
+		//For line 0
+		for (int pixel = 0; pixel < height/2; pixel++) {
+			int pixelValue = get_pixel(pixel, columnToScan, 3);
+			if (pixelValue < mins[0]) {
+				mins[0] = pixelValue;
 			}
-			if (pixelValue > max) {
-				max = pixelValue;
+			if (pixelValue > maxs[0]) {
+				maxs[0] = pixelValue;
 			}
 		}
+		
+		//For line 1
+		for (int pixel = 160; pixel < 320; pixel++) {
+			int pixelValue = get_pixel(rowToScan, pixel, 3);
+			if (pixelValue < mins[1]) {
+				mins[1] = pixelValue;
+			}
+			if (pixelValue > maxs[1]) {
+				maxs[1] = pixelValue;
+			}
+		}
+		
+		//For line 2
+		for (int pixel = height/2; pixel < height; pixel++) {
+			int pixelValue = get_pixel(pixel, columnToScan, 3);
+			if (pixelValue < mins[2]) {
+				mins[2] = pixelValue;
+			}
+			if (pixelValue > maxs[2]) {
+				maxs[2] = pixelValue;
+			}
+		}
+		
+		//For line 3
+		for (int pixel = 0; pixel < 160; pixel++) {
+			int pixelValue = get_pixel(rowToScan, pixel, 3);
+			if (pixelValue < mins[3]) {
+				mins[3] = pixelValue;
+			}
+			if (pixelValue > maxs[3]) {
+				maxs[3] = pixelValue;
+			}
+		}
+		times++;
 	}
 }
 
