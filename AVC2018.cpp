@@ -9,6 +9,7 @@
 int leftMotor = 1;
 int rightMotor = 2;		// May be wrong way around
 int defaultSpeed = -20;
+int previousAmountToTurn = 0;
 int defaultSec = 0;
 int defaultMicroSec  = 5000; 	//100ms or 0.1 seconds 
 int rowToScan = 119;
@@ -33,7 +34,7 @@ void detectLine()
 	int times = 0;
 	while(times < timesToRun)
 	{
-		int speed = defaultSpeed;
+		int speed = defaultSpeed - 10;
 		take_picture();
 		for(int i = 0; i < 320; i++)
 		{
@@ -49,7 +50,7 @@ void detectLine()
 		//if(threshold < NUMBER_HERE){break;}
 		//
 		int weight = -160;
-		double amountToTurn = 0;
+		int amountToTurn = 0;
 		for(int i  = 0; i < 320; i++)
 		{
 			int pixelValue = get_pixel(rowToScan, i, 3);
@@ -62,14 +63,26 @@ void detectLine()
 			if(weight == 0)
 				weight = 1;
 		}
-		if(amountToTurn <= 7 && amountToTurn >= -7)
+		//if(threshold < NUMBERHERE)
+		//{
+		//	if(previousAmountToTurn > 0)
+		//	{
+		//		turnRightUndo(defaultSec, defaultMicroSec, speed);
+		//	}
+		//	else
+		//	{
+		//		turnLeftUndo(defaultSec, defaultMicroSec, speed);
+		//	}
+		//}
+		
+		else if(amountToTurn <= 7 && amountToTurn >= -7)
 			goForward();
 		else if(amountToTurn > 7) //turn to the right
 		{	//left motor needs to speed up
 			//amountToTurn *= 0.1;
 			//if(amountToTurn > 128)
 				//amountToTurn = 128;
-			speed -= 10;//amountToTurn; //can decrease by up to 128
+			//speed -= amountToTurn; //can decrease up to 128
 			turnRight(defaultSec, defaultMicroSec, speed);
 		}
 		else //turn to the left
@@ -78,7 +91,7 @@ void detectLine()
 			//amountToTurn *= 0.1;
 			//if(amountToTurn > 128)
 				//amountToTurn = 128;
-			speed -= 10;//amountToTurn; //can decrease up to 128
+			//speed -= amountToTurn; //can decrease up to 128
 			turnLeft(defaultSec, defaultMicroSec, speed);
 		}
 		times++;
@@ -130,6 +143,22 @@ void turnRight(int sec, int microsec, double speed)
 	
 	//set_motor(leftMotor, 0);
 	//set_motor(rightMotor, 0);
+}
+
+void turnLeftUndo(int sec, int microSec, double speed)
+{
+	set_motor(leftMotor, -defaultSpeed);
+	set_motor(rightMotor, -speed);
+	
+	sleep1(sec, microsec);
+}
+
+void turnRightUndo(int sec, int microSec, double speed)
+{
+	set_motor(leftMotor, -speed);
+	set_motor(rightMotor, -defaultSpeed);
+	
+	sleep1(sec, microsec);
 }
 
 //pivots the AV to the left at a point
