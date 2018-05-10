@@ -45,6 +45,9 @@ void detectLine()
 		}
 		int threshold = (max + min) / 2;
 		cout << threshold;
+		//
+		//if(threshold < NUMBER_HERE){break;}
+		//
 		int weight = -160;
 		double amountToTurn = 0;
 		for(int i  = 0; i < 320; i++)
