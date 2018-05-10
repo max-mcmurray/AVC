@@ -14,6 +14,7 @@ int defaultSec = 0;
 int defaultMicroSec  = 5000; 	//5ms or 0.1 seconds 
 int reverseMicroSec = 500000;
 int rowToScan = 119;
+int columnToScan = SENDHELP;//whoops
 int max = 0;
 int min = 255;
 int timesToRun = 4500;
@@ -109,6 +110,24 @@ void detectLine()
 	//set_motor(leftMotor, 0);
 	//set_motor(rightMotor, 0);
 //}
+}
+
+//For the third quadrent written by Max <3
+void lineMaze() {
+	int times = 0;
+	while (times < timesToRun){
+		
+		takePicture();
+		for (int pixel = 0; pixel < 320; pixel++){
+			int pixelValue = get_pixel(rowToScan, pixel, 3);
+			if (pixelValue < min) {
+				min = pixelValue;
+			}
+			if (pixelValue > max) {
+				max = pixelValue;
+			}
+		}
+	}
 }
 
 //moves the AV forward
