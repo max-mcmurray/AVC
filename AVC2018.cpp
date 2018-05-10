@@ -44,6 +44,7 @@ void detectLine()
 				max = pix;
 		}
 		int threshold = (max + min) / 2;
+		cout << threshold;
 		int weight = -160;
 		double amountToTurn = 0;
 		for(int i  = 0; i < 320; i++)
