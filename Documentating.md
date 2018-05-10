@@ -41,3 +41,21 @@
 - Re-tested the robot on the maze using modified code: (EXTREME PROGRESS) The robot followed the white line at a slow speed and could turn at corners properly (without going off track) after camera angle was changed. 
 - Re-tested the robot on the maze using modified code: The sample speed was changed but the robot was moving extremely slow on the maze. 
 - Re-tested the robot on the maze using modified code: The sample speed, defaultSpeed and other speed were adjusted multiple times. The robot followed the white line properly at a slightly faster pace. More soldering needs to be done. 
+
+### 10/05
+- Attached the switch to the battery and base
+- Applied modified code to robot
+- Testing the robot on the maze: Speed is too slow therefore the robot isn't moving. The defaultSpeed and sample speed have been adjusted. 
+- Re-testing the robot on the maze: Sample speed is too slow therefore the robot isn't reading the white line fast enough for the speed it is moving at. The sample speed has been adjusted. 
+- Re-testing the robot on the maze: Turn speed is too fast but defaultSpeed is ok. The robot is turning too fast for the defaultSpeed therefore it is going off track. Adjustment must be made to turn speed. 
+- Re-testing the robot on the maze: (EXTREME DRAWBACK) Adjustments have been made but the robot is no longer following the white line. defaultSpeed and sample speed has been adjusted back to the original values.
+- Re-testing the robot on the maze: The robot can now follow the white line but not as precisely as before. Improvements need to be made in order for the robot to correct itself (reverse etc.) when the camera has scanned black. 
+- Re-testing the robot on the maze: The robot can follow the white line properly but at certain bends in the maze, the robot cannot turn fast enough therefore the turn speed needs to be increased slightly. 
+- Re-testing the robot on the maze: The robot follows the line at a moderate speed but at certain bends in the maze, the robot only sees black therefore it gets confused. Modification has been made in order for the robot to correct itself and reverse when black is detected by the camera.
+- Re-testing the robot on the maze: The robot is reversing when required but is not reversing enough therefore the reverse time needs to be increased.
+- Re-testing the robot on maze: The robot is reversing still but the reverse speed needs more power therefore the reverse speed needs to be adjusted and the defaultSpeed is increased. 
+- Re-testing the robot on maze: The robot is moving through the maze but the turn is too wide therefore the turn speed needs to be adjusted back to our previous value.
+- Re-tesing the robot on maze: The robot moved through the maze and turned correctly but the reverse time needs to be increased.
+- Re-testing the robot on maze: The robot corrects it self well and breaks at max white but the turn is too wide therefore the turn speed and reverse speed needs to be adjusted. 
+- Re-testing the robot on maze: (EXTREMELY GOOD RUN) The robot turns better and corrects itself properly but the turn is still quite wide therefore the defaultSpeed needs to be adjusted for the inside wheel speed.
+- Re-testing the robot on maze: (PERFECT RUN) The robot is turning extremely well at a lower speed. Begin programming next part ----> 
