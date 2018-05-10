@@ -71,6 +71,26 @@ void detectLineToby(x_pixels, y, white_boundary) //x_pixels: how many pixels to 
 		total += num
 	}
 	white_average = total/i
+}
+
+// returns true when red is detected, false when not
+//written by Toby Stayner
+bool detectRed()
+{
+	take_picture();
+	for(int i = 0; i < 320; i++)
+	{
+		int pix_red = get_pixel(i, rowToScan, 0);
+		int pix_green = get_pixel(i, rowToScan, 1);
+		int pix_blue = get_pixel(i, rowToScan, 2);
+		if(pix_red > min && pix_green < max && pix_blue < max)
+			return 1;
+		else{
+			return 0;
+		}
+	}
+}
+		
 //moves the AV forward
 //written by Joshua Hindley
 void goForward(int sec, int microsec, double speed)
@@ -155,8 +175,7 @@ void navigateWalledMaze()
 		goForward();
 	}
 	else{ // do this when reaching a dead end
-		pivotRight();
-		pivotRight();
+		pivotRight(); //double the timing for a 180
 	}
 }
 
