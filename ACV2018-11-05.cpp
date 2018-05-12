@@ -8,16 +8,18 @@
 
 int leftMotor = 1;
 int rightMotor = 2;		// May be wrong way around
-int defaultSpeed = -25;
+int straightSpeed = -40;	//CHANGE THIS TO MAKE GOING STRAIGHT WORK PROPERLY
+int insideWheelSpeed = -25;
+int turningWheelSpeed = -50;
 int reverseSpeed = 50;
 int defaultSec = 0;
-int defaultMicroSec  = 5000; 	//5ms or 0.1 seconds 
+int defaultMicroSec  = 5000; 	//5ms or 0.005 seconds 
 int reverseMicroSec = 500000;
 int rowToScan = height/2;
-int columnToScan = width/2;//whoops
+int columnToScan = width/2;	//whoops
 int max = 0;
 int min = 255;
-int timesToRun = 4500;
+//int timesToRun = 4500;
 int blackValue = 100;
 
 
@@ -48,8 +50,8 @@ void openStartGate()
 void detectLine()
 {
 	//try{
-	int times = 0;
-	while(times < timesToRun)
+	//int times = 0;
+	while(true)//(times < timesToRun)
 	{
 		max = 0;
 		min = 255;
@@ -67,7 +69,7 @@ void detectLine()
 		{
 			reverse(defaultSec, reverseMicroSec);
 		}
-		else if(min > blackValue)
+		else if(min > whiteValue)
 		{
 			printf("*****BROKEN!*****\n");
 			break;
@@ -89,32 +91,22 @@ void detectLine()
 			if(weight == 0)
 				weight = 1;
 		}
-		if(amountToTurn <= 7 && amountToTurn >= -7)
+		if(amountToTurn <= 20 && amountToTurn >= -20) //CHANGE THIS VALUE TO CHANGE HOW OFTEN IT TURNS
 		{
 			goForward();
-			printf("GOING FORWARDSSS\n");
+			printf("GOING FORWARDS\n");
 		}
-		else if(amountToTurn > 7) //turn to the right
-		{	//left motor needs to speed up
-			//amountToTurn *= 0.1;
-			//if(amountToTurn > 128)
-				//amountToTurn = 128;
-			speed -= 25;//amountToTurn; //can decrease by up to 128
+		else if(amountToTurn > 20) //turn to the right
+		{	
 			turnRight(defaultSec, defaultMicroSec, speed);
 		}
 		else //turn to the left
-		{	//right motor needs to speed up
-			//amountToTurn = -amountToTurn;
-			//amountToTurn *= 0.1;
-			//if(amountToTurn > 128)
-				//amountToTurn = 128;
-			speed -= 25;//amountToTurn; //can decrease up to 128
+		{	
 			turnLeft(defaultSec, defaultMicroSec, speed);
 		}
-		times++;
-		}
-		
+		//times++;
 	}
+		
 	set_motor(leftMotor, 0);
 	set_motor(rightMotor, 0);
 //}
@@ -200,8 +192,8 @@ void lineMaze() {
 //written by Joshua Hindley
 void goForward()
 {
-	set_motor(leftMotor, defaultSpeed);
-	set_motor(rightMotor, defaultSpeed);
+	set_motor(leftMotor, straightSpeed);
+	set_motor(rightMotor, straightSpeed);
 	
 	sleep1(defaultSec, defaultMicroSec);
 	
@@ -213,8 +205,8 @@ void goForward()
 //written by Ben Robertson
 void turnLeft(int sec, int microsec, double speed)
 {
-	set_motor(leftMotor, defaultSpeed);
-	set_motor(rightMotor, speed);
+	set_motor(leftMotor, insideWheelSpeed);
+	set_motor(rightMotor, turningWheelSpeed);
 	
 	sleep1(sec, microsec);
 
@@ -226,8 +218,8 @@ void turnLeft(int sec, int microsec, double speed)
 //written by Joshua Hindley
 void turnRight(int sec, int microsec, double speed)
 {
-	set_motor(leftMotor, speed);
-	set_motor(rightMotor, defaultSpeed);
+	set_motor(leftMotor, turningWheelSpeed);
+	set_motor(rightMotor, insideWheelSpeed);
 	
 	sleep1(sec, microsec);
 	
@@ -246,8 +238,8 @@ void reverse(int sec, int microSec)
 //written by Joshua Hindley
 void pivotLeft(int sec, int microsec, double speed)
 {
-	set_motor(leftMotor, -speed);
-	set_motor(rightMotor, speed);
+	set_motor(leftMotor, -insideWheelSpeed);
+	set_motor(rightMotor, insideWheelSpeed);
 	
 	sleep1(sec, microsec);
 	
@@ -259,8 +251,8 @@ void pivotLeft(int sec, int microsec, double speed)
 //written by Joshua Hindley
 void pivotRight(int sec, int microsec, double speed)
 {
-	set_motor(leftMotor, speed);
-	set_motor(rightMotor, -speed);
+	set_motor(leftMotor, insideWheelSpeed);
+	set_motor(rightMotor, -insideWheelSpeed);
 	
 	sleep1(sec, microsec);
 	
