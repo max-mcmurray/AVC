@@ -12,7 +12,7 @@
 
 ### Week 2:
 
-- ~~[ ] **[All]**: Book CO242A every Thursday~~ This is no longer needed
+- [ ] ~~**[All]**: Book CO242A every Thursday~~ This is no longer needed
 - [x] Josh: Program ~~sensors and~~ basic movement into AV - Sensors have not yet been added to the AV
 - [x] Josh: Program and test the completion of quadrant 2
 - [x] Josh: Assign methods to each member of the group
