@@ -171,22 +171,32 @@ void lineMaze() {
 			}
 		}
 
+		//If given the opportunity to turn left then do so
 		if (maxs[3] > whiteValue) {
             pivotLeft(0, rightAngleMSec, pivotSpeed);
             goForward();
 		}
+		
+		//If can't turn left but can go forward then go forward
 		else if (maxs[0] > whiteValue) {
 		    goForward();
 		}
-		else if (maxs[0] < blackValue & maxs[1] > whiteValue) {
-		    pivotRight(0, rightAngleMSec, pivitSpeed);
-		    goForward();
+		
+		//Turn right if can
+		else if (maxs[1] > whiteValue) {
+			pivotRight(0, rightAngleMSec, pivotSpeed)
+		}
+		
+		//Must be at dead end so turn round
+		else {
+			pivotRight(0, rightAngleMSec*2, pivotSpeed)
 		}
 
-		adjustToLine();
+		adjustToLine();//Mayyyyyyybe write this or make it work
 		times++;
 	}
 }
+
 
 //moves the AV forward
 //written by Joshua Hindley
