@@ -27,7 +27,7 @@
 - [ ] Josh: Ensure AV can complete quadrants 1, 2 and 3
 - [ ] Josh: Test methods as completed by other members
 - [ ] Penny: Assess team member progress, organise team meeting and plan for next week
-- [ ] Penny: Write method to open gate
+- [x] Penny: Write method to open gate
 - [ ] Penny: Document progress to date
 - [ ] Max: Update GitHub with development and check over AV design
 - [ ] Max: Write method to complete line maze
