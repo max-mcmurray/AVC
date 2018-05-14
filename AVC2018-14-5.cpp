@@ -48,13 +48,14 @@ void openStartGate()
 	connect_to_server(server_addr, port);
 	printf("Connecting to server.\n");
 	send_to_server(message);
-	printf("Sending message: %s\n", message);
+	//printf("Sending message: %s\n", message);
 	receive_from_server(message);
-	printf("Received password: %s\n", message);
+	//printf("Received password: %s\n", message);
 	send_to_server(message);
-	printf("Sending password: %s.\n", message);
+	printf("Sending password.\n");
 	printf("Gate opened.\n");
-	sleep1(0, 500000);
+	printf("Quadrant 1 completed.\n\n");
+	sleep1(0, 200000);
 	detectLine();
 }
 
@@ -83,6 +84,7 @@ void detectLine()
 		else if(min > whiteValue)
 		{
 			printf("*****BROKEN!*****\n");
+			printf("Quadrant 2 completed");
 			break;
 		}
 		else
