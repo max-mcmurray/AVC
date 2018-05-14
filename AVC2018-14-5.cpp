@@ -63,70 +63,69 @@ void openStartGate()
 //written by Joshua Hindley
 void detectLine()
 {
-	//try{
-	while(true)
+	try{
+		while(true)
+		{
+			max = 0;
+			min = 255;
+			take_picture();
+			for(int i = 0; i < 320; i++)
+			{
+				int pix = get_pixel(rowToScan, i, 3);
+				if(pix < min)
+					min = pix;
+				if(pix > max)
+					max = pix;
+			}
+			if(max < blackValue)
+			{
+				reverse(defaultSec, reverseMicroSec);
+			}
+			else if(min > whiteValue)
+			{
+				printf("*****BROKEN!*****\n");
+				printf("Quadrant 2 completed");
+				break;
+			}
+			else
+			{
+				int threshold = (max + min) / 2;
+				int weight = -160;
+				double amountToTurn = 0;
+				for(int i  = 0; i < 320; i++)
+				{
+					int pixelValue = get_pixel(rowToScan, i, 3);
+					if(pixelValue < threshold)
+						pixelValue = 0;
+					else
+						pixelValue = 1;
+					amountToTurn += (weight * pixelValue);
+					weight++;
+					if(weight == 0)
+						weight = 1;
+				}
+				if(amountToTurn <= 20 && amountToTurn >= -20) //CHANGE THIS VALUE TO CHANGE HOW OFTEN IT TURNS
+				{
+					goForward();
+				}	
+				else if(amountToTurn > 20) //turn to the right
+				{		
+					turnRight(defaultSec, defaultMicroSec);
+				}
+				else //turn to the left
+				{	
+					turnLeft(defaultSec, defaultMicroSec);
+				}
+			}
+		}
+	
+	}
+	catch(const std::exception& e)
 	{
-		max = 0;
-		min = 255;
-		take_picture();
-		for(int i = 0; i < 320; i++)
-		{
-			int pix = get_pixel(rowToScan, i, 3);
-			if(pix < min)
-				min = pix;
-			if(pix > max)
-				max = pix;
-		}
-		if(max < blackValue)
-		{
-			reverse(defaultSec, reverseMicroSec);
-		}
-		else if(min > whiteValue)
-		{
-			printf("*****BROKEN!*****\n");
-			printf("Quadrant 2 completed");
-			break;
-		}
-		else
-		{
-			int threshold = (max + min) / 2;
-			int weight = -160;
-			double amountToTurn = 0;
-			for(int i  = 0; i < 320; i++)
-			{
-				int pixelValue = get_pixel(rowToScan, i, 3);
-				if(pixelValue < threshold)
-					pixelValue = 0;
-				else
-					pixelValue = 1;
-				amountToTurn += (weight * pixelValue);
-				weight++;
-				if(weight == 0)
-					weight = 1;
-			}
-			if(amountToTurn <= 20 && amountToTurn >= -20) //CHANGE THIS VALUE TO CHANGE HOW OFTEN IT TURNS
-			{
-				goForward();
-			}	
-			else if(amountToTurn > 20) //turn to the right
-			{		
-				turnRight(defaultSec, defaultMicroSec);
-			}
-			else //turn to the left
-			{	
-				turnLeft(defaultSec, defaultMicroSec);
-			}
-		//times++;
-		}
+		printf("An error occured" + e);
 	}
 	set_motor(leftMotor, 0);
 	set_motor(rightMotor, 0);
-//}
-//catch(exception e)
-//{
-	//set_motor(leftMotor, 0);
-	//set_motor(rightMotor, 0);
-//}
 }
 
 //For the third quadrant written by Max <3
