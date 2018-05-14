@@ -29,7 +29,7 @@ int whiteValue = 150;
 int width = mmmmmmmmowommmmmm;
 int height = HUFHUEFHIEHFIHFIOEF;
 int rightAngleMSec = mmmmmmmmmmmmmmmmmmmmmmmmmmm;
-double  pivitSpeed = stufIGuess;
+double pivotSpeed = stufIGuess;
 //***************************************************************************************
 
 
