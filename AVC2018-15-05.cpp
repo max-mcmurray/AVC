@@ -90,7 +90,7 @@ void detectLine()
 			else if(min > whiteValue)
 			{
 				printf("*****BROKEN!*****\n");
-				printf("Quadrant 2 completed");
+				printf("Quadrant 2 completed.\n\n");
 				break;
 			}
 			else
