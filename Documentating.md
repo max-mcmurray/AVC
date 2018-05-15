@@ -59,3 +59,9 @@
 - Re-testing the robot on maze: The robot corrects it self well and breaks at max white but the turn is too wide therefore the turn speed and reverse speed needs to be adjusted. 
 - Re-testing the robot on maze: (EXTREMELY GOOD RUN) The robot turns better and corrects itself properly but the turn is still quite wide therefore the defaultSpeed needs to be adjusted for the inside wheel speed.
 - Re-testing the robot on maze: (PERFECT RUN) The robot is turning extremely well at a lower speed. Begin programming next part ----> 
+
+### 14/05
+
+- Testing the code to open the first gate
+- Adjusting speeds in order for the robot to move and take bends in the maze smoothly
+- The gate is opening and the robot is moving through it at an appropriate time. The robot then moves through the maze smoothly.
