@@ -74,19 +74,21 @@ void detectLineToby(x_pixels, y, white_boundary) //x_pixels: how many pixels to 
 }
 
 // returns true when red is detected, false when not
-//written by Toby Stayner
-bool detectRed()
+// written by Toby Stayner
+bool detectRed(int min, int max)
+	// where min is the min red-ish value we want to detect and max is the highest
+	// green and blue can be before detecting something else than red
 {
-	take_picture();
-	for(int i = 0; i < 320; i++)
+	take_picture(); // takes an image
+	for(int i = 0; i < 319; i++) // loops for 320 times (amount of x pixels)
 	{
-		int pix_red = get_pixel(i, rowToScan, 0);
-		int pix_green = get_pixel(i, rowToScan, 1);
-		int pix_blue = get_pixel(i, rowToScan, 2);
-		if(pix_red > min && pix_green < max && pix_blue < max)
-			return 1;
-		else{
-			return 0;
+		int pix_red = get_pixel(i, rowToScan, 0); // get the red pixel value
+		int pix_green = get_pixel(i, rowToScan, 1); // get the green pixel value
+		int pix_blue = get_pixel(i, rowToScan, 2); // get the blue pixel value
+		if(pix_red > min && pix_green < max && pix_blue < max) // detect red if red is high, green low and blue low
+			return 1; // return true
+		else{ // if not red
+			return 0; // return false
 		}
 	}
 }
@@ -157,12 +159,12 @@ void navigateLineMaze()
 //follows the left/right wall of the maze, completing the final quadrant
 //written by Toby Stayner
 // in progress - follows left side of the maze needs more information
-void navigateWalledMaze()
+void navigateWalledMaze(int left_sensor, front_sensor, right_sensor)
 {
 	int distanceThreshold = 300; //may need to change this and create different thresholds for left and right- TEST THIS
-	int adc_reading_left = read_analog(0);
-	int adc_reading_front = read_analog(1);
-	int adc_reading_right = read_analog(2);
+	int adc_reading_left = read_analog(left_sensor); //
+	int adc_reading_front = read_analog(front_sensor);
+	int adc_reading_right = read_analog(right_sensor);
 	if(adc_reading_left > distanceThreshold){ // if there is a space to the left, turn left
 		pivotLeft(); //need timings 
 		goForward(); // go forward 1 section (grid e.g. 18cm by 18 cm)- TEST THIS
@@ -175,7 +177,17 @@ void navigateWalledMaze()
 		goForward();
 	}
 	else{ // do this when reaching a dead end
-		pivotRight(); //double the timing for a 180
+		pivotRight(); // only need to rotate to the right as the next time it detects a space, it will be a space to the right
+	}
+}
+
+void centreWallMaze()
+{
+	if(adc_reading_left < adc_reading_right){ // when AV is close to the left wall
+		pivotRight()
+	}
+	else if(adc_reading_left > adc_reading_right){ // when AV is close to the right wall
+		pivotLeft()
 	}
 }
 
