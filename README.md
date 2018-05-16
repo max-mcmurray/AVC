@@ -24,13 +24,14 @@
 
 ### Week 3:
 
-- [ ] Josh: Ensure AV can complete quadrants 1, 2 and 3
+- [x] Josh: Ensure AV can complete quadrants 1, 2 and 3
 - [ ] Josh: Test methods as completed by other members
 - [ ] Penny: Assess team member progress, organise team meeting and plan for next week
 - [x] Penny: Write method to open gate
 - [ ] Penny: Document progress to date
 - [ ] Max: Update GitHub with development and check over AV design
-- [ ] Max: Write method to complete line maze
+- [x] Max: Write method to complete line maze
+- [ ] Toby, Ben: Add sensors to the AV build
 - [ ] Toby, Ben: Finish the AV build with all the required parts
 - [ ] Toby: Write method to complete walled maze
 
