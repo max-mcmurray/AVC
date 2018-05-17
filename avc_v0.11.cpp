@@ -156,21 +156,25 @@ void navigateLineMaze()
 	
 }
 
-//follows the left/right wall of the maze, completing the final quadrant
+//follows the left wall of the maze, completing the final quadrant
 //written by Toby Stayner
-// in progress - follows left side of the maze needs more information
-bool sideWallDetect = 0;
-int frontThreshold = 300; //may need to change this and create different thresholds for left and right- TEST THIS
-int wallThreshold = 300; 
-int noiseConstant = 50;
-int leftSensor = ;
+
+int frontThreshold = 300; // AV considers the robot has a wall in front anything larger than this
+int wallThreshold = 300; // AV considers the robot has a wall either side anything larger than this
+int noiseConstant = 50; // amount of leeway before the left sensor is no longer considered equal to the right sensor
+double rotate180 = ; // amount of time (microsecs) the AV should turn for to get to 180 degrees
+int forwardAfterTurn = 100000; // amount of time (microsecs) the AV should continue travelling forward once it has made a turn
+
+int leftSensor = ; // the number ports that the wires are physically connected to
 int frontSensor = ;
 int rightSensor = ;
 
-void navigateWalledMaze(int left_sensor, front_sensor, right_sensor)
+bool sideWallDetect = 0;
+
+void navigateWalledMaze()
 {
 	while(1){
-		int adc_reading_left = read_analog(left_sensor);
+		int adc_reading_left = read_analog(left_sensor); // read the sensor values and store them
 		int adc_reading_front = read_analog(front_sensor);
 		int adc_reading_right = read_analog(right_sensor);
 		// if there are nearby walls on both sides and can go forward
@@ -184,7 +188,7 @@ void navigateWalledMaze(int left_sensor, front_sensor, right_sensor)
 			turnLeft(defaultSec, defaultMicroSec);
 			sleep1(0, 100000);
 			while(sideWallDetect()){ // move forward until there is a wall on both sides
-				goForward(defaultMicroSec);
+				goForward(forwardAfterTurn);
 			}
 			goForward(100000);
 		}
@@ -194,7 +198,7 @@ void navigateWalledMaze(int left_sensor, front_sensor, right_sensor)
 			while(sideWallDetect()){ // move forward until there is a wall on both sides
 				goForward(defaultMicroSec);
 			}
-			goForward(100000);
+			goForward(forwardAfterTurn);
 		}
 		// if there is a path on the right only
 		else if(adc_reading_left > wallThreshold & adc_reading_right < wallThreshold & adc_reading_front > frontThreshold)
@@ -204,12 +208,12 @@ void navigateWalledMaze(int left_sensor, front_sensor, right_sensor)
 			while(sideWallDetect()){ // move forward until there is a wall on both sides
 				goForward(defaultMicroSec);
 			}
-			goForward(100000);
+			goForward(forwardAfterTurn);
 		}
 	 	// if there are nearby walls on both sides and cannot go forward
 		else if(adc_reading_left > wallThreshold & adc_reading_right > wallThreshold & adc_reading_front > frontThreshold){
 			printf("Dead end detected! Turning around.\n");
-			turnRight(defaultSec, defaultMicroSec); // need to multiply by a number e.g. 1.3 to do a 180
+			turnRight(defaultSec, rotate180);
 		}
 	}
  
@@ -228,7 +232,7 @@ void centreWallMaze(int adc_reading_left, int avc_reading_right)
 		pivotLeft(defaultSec, defaultMircoSec, insideWheelSpeed);
 	}
 	else{
-		goForward(defaultMicroSec);
+		goForward(defaultMicroSec); // if AV is centred, then continue going foward
 	}
 }
 
