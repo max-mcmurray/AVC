@@ -163,6 +163,9 @@ bool sideWallDetect = 0;
 int frontThreshold = 300; //may need to change this and create different thresholds for left and right- TEST THIS
 int wallThreshold = 300; 
 int noiseConstant = 50;
+int leftSensor = ;
+int frontSensor = ;
+int rightSensor = ;
 
 void navigateWalledMaze(int left_sensor, front_sensor, right_sensor)
 {
@@ -173,7 +176,7 @@ void navigateWalledMaze(int left_sensor, front_sensor, right_sensor)
 		// if there are nearby walls on both sides and can go forward
 		if(adc_reading_left > wallThreshold & adc_reading_right > wallThreshold & adc_reading_front < frontThreshold){
 			printf("Walls on both sides detected. Attempting to go forward.\n");
-			centreWallMaze();
+			centreWallMaze(adc_reading_left, adc_reading_right);
 		}
 		// if there is a path on the left
 		else if(adc_reading_left < wallThreshold & adc_reading_right > wallThreshold){ 
@@ -217,12 +220,12 @@ void centreWallMaze(int adc_reading_left, int avc_reading_right)
 	if(adc_reading_left + noiseConstant < adc_reading_right){ // when AV is close to the left wall
 		printf("Too close to left wall!\n");
 		reverse(defaultSec, reverseMicroSec);
-		pivotRight();
+		pivotRight(defaultSec, defaultMircoSec, insideWheelSpeed);
 	}
 	else if(adc_reading_left > adc_reading_right + noiseConstant){ // when AV is close to the right wall
 		printf("Too close to right wall!\n");
 		reverse(defaultSec, reverseMicroSec);
-		pivotLeft();
+		pivotLeft(defaultSec, defaultMircoSec, insideWheelSpeed);
 	}
 	else{
 		goForward(defaultMicroSec);
