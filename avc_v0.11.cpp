@@ -159,39 +159,83 @@ void navigateLineMaze()
 //follows the left/right wall of the maze, completing the final quadrant
 //written by Toby Stayner
 // in progress - follows left side of the maze needs more information
+bool sideWallDetect = 0;
+int frontThreshold = 300; //may need to change this and create different thresholds for left and right- TEST THIS
+int wallThreshold = 300; 
+int noiseConstant = 50;
+
 void navigateWalledMaze(int left_sensor, front_sensor, right_sensor)
 {
-	int distanceThreshold = 300; //may need to change this and create different thresholds for left and right- TEST THIS
-	int adc_reading_left = read_analog(left_sensor); //
-	int adc_reading_front = read_analog(front_sensor);
-	int adc_reading_right = read_analog(right_sensor);
-	if(adc_reading_left > distanceThreshold){ // if there is a space to the left, turn left
-		pivotLeft(); //need timings 
-		goForward(); // go forward 1 section (grid e.g. 18cm by 18 cm)- TEST THIS
+	while(1){
+		int adc_reading_left = read_analog(left_sensor);
+		int adc_reading_front = read_analog(front_sensor);
+		int adc_reading_right = read_analog(right_sensor);
+		// if there are nearby walls on both sides and can go forward
+		if(adc_reading_left > wallThreshold & adc_reading_right > wallThreshold & adc_reading_front < frontThreshold){
+			printf("Walls on both sides detected. Attempting to go forward.\n");
+			centreWallMaze();
+		}
+		// if there is a path on the left
+		else if(adc_reading_left < wallThreshold & adc_reading_right > wallThreshold){ 
+			printf("Turning left.\n");
+			turnLeft(defaultSec, defaultMicroSec);
+			sleep1(0, 100000);
+			while(sideWallDetect()){ // move forward until there is a wall on both sides
+				goForward(defaultMicroSec);
+			}
+			goForward(100000);
+		}
+		// if there is no path to the left, but can go forward
+		else if(adc_reading_left > wallThreshold & adc_reading_front < frontThreshold){ 
+			printf("Going forward.\n");
+			while(sideWallDetect()){ // move forward until there is a wall on both sides
+				goForward(defaultMicroSec);
+			}
+			goForward(100000);
+		}
+		// if there is a path on the right only
+		else if(adc_reading_left > wallThreshold & adc_reading_right < wallThreshold & adc_reading_front > frontThreshold)
+			printf("Turning right.\n");
+			turnRight(defaultSec, defaultMicroSec);
+			sleep1(0, 100000);
+			while(sideWallDetect()){ // move forward until there is a wall on both sides
+				goForward(defaultMicroSec);
+			}
+			goForward(100000);
+		}
+	 	// if there are nearby walls on both sides and cannot go forward
+		else if(adc_reading_left > wallThreshold & adc_reading_right > wallThreshold & adc_reading_front > frontThreshold){
+			printf("Dead end detected! Turning around.\n");
+			turnRight(defaultSec, defaultMicroSec); // need to multiply by a number e.g. 1.3 to do a 180
+		}
 	}
-	else if(adc_reading_front > distanceThreshold){ // do this if can't go left
-		goForward(); 
-	}
-	else if(adc_reading_right > distance Threshold){ // do this if only valid space is to the right
+ 
+}
+
+void centreWallMaze(int adc_reading_left, int avc_reading_right)
+{
+	if(adc_reading_left + noiseConstant < adc_reading_right){ // when AV is close to the left wall
+		printf("Too close to left wall!\n");
+		reverse(defaultSec, reverseMicroSec);
 		pivotRight();
-		goForward();
 	}
-	else{ // do this when reaching a dead end
-		pivotRight(); // only need to rotate to the right as the next time it detects a space, it will be a space to the right
+	else if(adc_reading_left > adc_reading_right + noiseConstant){ // when AV is close to the right wall
+		printf("Too close to right wall!\n");
+		reverse(defaultSec, reverseMicroSec);
+		pivotLeft();
 	}
-}
-
-void centreWallMaze()
-{
-	if(adc_reading_left < adc_reading_right){ // when AV is close to the left wall
-		pivotRight()
-	}
-	else if(adc_reading_left > adc_reading_right){ // when AV is close to the right wall
-		pivotLeft()
+	else{
+		goForward(defaultMicroSec);
 	}
 }
 
-//waits for the gate in the walled maze to open and goes through it when does
-void waitForGateToOpen()
-{
+bool sideWallDetect(){
+	int adc_reading_left = read_analog(left_sensor);
+	int adc_reading_right = read_analog(right_sensor);
+	if(adc_reading_left > wallThreshold & adc_reading_right > wallThreshold){ // if there is a wall on both sides
+		return 1;
+	}
+	else{
+		return 0;
+	}
 }
