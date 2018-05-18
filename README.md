@@ -16,7 +16,7 @@
 - [x] Josh: Program ~~sensors and~~ basic movement into AV - Sensors have not yet been added to the AV
 - [x] Josh: Program and test the completion of quadrant 2
 - [x] Josh: Assign methods to each member of the group
-- [ ] Toby, Ben: Refine build of AV
+- [x] Toby, Ben: Refine build of AV
 - [x] Ben: Program methods for basic movement
 - [x] Penny: Get everyone organised and plan for next week
 - [x] Penny: Document progress
@@ -25,11 +25,11 @@
 ### Week 3:
 
 - [x] Josh: Ensure AV can complete quadrants 1, 2 and 3
-- [ ] Josh: Test methods as completed by other members
-- [ ] Penny: Assess team member progress, organise team meeting and plan for next week
+- [x] Josh: Test methods as completed by other members
+- [x] Penny: Assess team member progress, organise team meeting and plan for next week
 - [x] Penny: Write method to open gate
-- [ ] Penny: Document progress to date
-- [ ] Max: Update GitHub with development and check over AV design
+- [x] Penny: Document progress to date
+- [x] Max: Update GitHub with development and check over AV design
 - [x] Max: Write method to complete line maze
 - [ ] Toby, Ben: Add sensors to the AV build
 - [ ] Toby, Ben: Finish the AV build with all the required parts
