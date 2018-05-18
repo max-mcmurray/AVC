@@ -65,3 +65,26 @@
 - Testing the code to open the first gate
 - Adjusting speeds in order for the robot to move and take bends in the maze smoothly
 - The gate is opening and the robot is moving through it at an appropriate time. The robot then moves through the maze smoothly.
+
+### 15/05
+
+- Compiled different versions of code and tested it the robot on the maze
+- Writing code for quadrant 3: beginning with the code that makes the robot turn at a right angle which includes establishing the values for each variable that is used
+- Adjusting the time of the turn so it doesn't turn too fast or too slow
+- Testing the robot on maze: The robot is continuously making a 360 degree turn therefore code needs to be looked at again and adjustments need to be made. 
+
+### 16/05
+
+- Cleaned up code so that it is systematic and easy to follow
+- Writing code so that the robot stops at the orange line and also clearly makes left and right turns when required
+- (EXTREMELY PROMISING) Test run to see if the robot correctly makes left and right turns when required. Adjustments need to be made to the pivotSpeed and defaultSpeed
+- (EXTREMELY EXTREMELY PROMISING) The robot is turning fairly correctly when required now we need to put together the code with the master copy so that it runs the maze up to the end of Quadrant 3
+- Minor setback after code was put together - robot isn't turning properly like the previous run therefore adjustments are being made to motor speed
+- (HIGHLY PROMISING) The robot is moving correctly but the right and left turns are slightly off but the robot has reached the end
+- (SUCCESSFUL RUN) The robot is moving correctly from the beginning of the maze to the end of Quadrant 3.
+
+### 18/05
+
+- Printing out the parts to connect the sensors to the robot
+- Attaching the front sensor to the robot
+- Writing code so that the robot stops at the orange line
