@@ -79,7 +79,7 @@ void openStartGate()
 	send_to_server(message);
 	printf("Sending password.\n");
 	printf("Gate opened.\n");
-	printf("Quadrant 1 completed.\n\n");
+	printf("******************Quadrant 1 completed.\n\n");
 }
 
 //finds where the white line is and calls methods to move the AV stay on the line
@@ -107,8 +107,7 @@ void detectLine()
 			}
 			else if(min > blackValue)
 			{
-				printf("*****BROKEN!*****\n");
-				printf("Quadrant 2 completed\n\n");
+				printf("******************Quadrant 2 completed\n\n");
 				return;
 			}
 			else
@@ -167,13 +166,14 @@ void lineMaze() {
             take_picture();
             for(int i = 0; i < 320; i++)
             {
-                int pix = get_pixel(rowToScan, i, 3);/*HARDCODED*/
+                int pix = get_pixel(rowToScan, i, 3);
                 if(pix < min)
                     min = pix;
                 if(pix > max)
                     max = pix;
             }
-            //***********************************************************************************
+            
+     
             if(max < blackValue+25)
             {
                 if (!justTurned) {
@@ -188,13 +188,7 @@ void lineMaze() {
                     justTurned = false;
                     sleep1(0, 500000);
                 }
-            }/*
-            else if((get_pixel(160, 120, 0) > 150) & (get_pixel(160, 120, 1) > 50) & (get_pixel(160, 120, 2) < 100) )
-            {
-                printf("*****BROKEN!*****\n");
-                printf("Quadrant 3 completed\n");
-                return;
-            }*/
+            }
             else
             {
 				justTurned = false;
@@ -213,7 +207,7 @@ void lineMaze() {
                     if(weight == 0)
                         weight = 1;
                 }
-                if(amountToTurn <= 20 && amountToTurn >= -20) //CHANGE THIS VALUE TO CHANGE HOW OFTEN IT TURNS
+                if(amountToTurn <= 20 && amountToTurn >= -20) 
                 {
                     goForward(defaultMicroSec);
                     //sleep1(defaultSec, 100000);
@@ -235,13 +229,22 @@ void lineMaze() {
 					//set_motor(rightMotor, 0);
                 }
             }
+            
+            if((get_pixel(160, 120, 0) > 150) & (get_pixel(160, 120, 2) < 100))
+            {
+                printf("******************Quadrant 3 completed\n");
+                set_motor(leftMotor, 0);
+                set_motor(rightMotor, 0);
+                return;
+            }
         }
 
     }
     catch(const std::exception& e) {
 		printf("An error occured\n");
 	}
-
+	set_motor(leftMotor, 0);
+	set_motor(rightMotor, 0);
 }
 
 //moves the AV forward
