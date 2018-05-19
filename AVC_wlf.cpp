@@ -333,6 +333,8 @@ void pivotRight(int sec, int microsec, double speed)
 	set_motor(rightMotor, 0);
 }
 
+//finds and returns the maximum and minimum color
+//written by Joshua Hindley
 std::pair<int, int> findMaxAndMin()
 {
 	//set the max and min values
@@ -349,6 +351,7 @@ std::pair<int, int> findMaxAndMin()
 		if(pix > maximum)
 			maximum = pix;
 	}
+	//returns the maximum and minumum color
 	return std::pair<int, int>(maximum, minimum);
 }
 
