@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <exception>
-#include <tuple>
+#include <utility>
 #include "E101.h"
 
 /////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ void turnRight(int sec, int microsec);
 void pivotLeft(int sec, int microsec, double speed);
 void pivotRight(int sec, int microsec, double speed);
 double getAmountToTurn(double threshold);
-std::tuple<int, int> findMaxAndMin();
+std::pair<int, int> findMaxAndMin();
 
 /////////////////////////////////////////////////////////////////////
 ////////////////////////////// METHODS //////////////////////////////
@@ -101,17 +101,30 @@ void detectLine()
 	try{
 		while(true)
 		{
-			tie(max, min) = findMaxAndMin;
-			/* FIND IF THIS WORKS */
+			
+			
+			
+			
+			std::pair<int, int>(max, min) = findMaxAndMin();
+			/* FIND OUT IF THIS WORKS */
+			printf("Max: %d\n", max);
+			printf("Min: %d\n", min);
+			
+			
+			
+			
+			
+			/*
+			
 			//set the max and min values
 			max = 0;
 			min = 255;
 			take_picture();
 			
-			/*
-			POTENTIALLY WRITE A FUNCTION TO GET THE MAXIMUM
-			AND MINIMUM VALUES OF THE PIXEL COLORS
-			*/
+			
+			//POTENTIALLY WRITE A FUNCTION TO GET THE MAXIMUM
+			//AND MINIMUM VALUES OF THE PIXEL COLORS
+			
 			
 			for(int i = 0; i < 320; i++)
 			{
@@ -123,6 +136,7 @@ void detectLine()
 				if(pix > max)
 					max = pix;
 			}
+			*/
 			//if all the rowToScan pixels are black
 			if(max < blackValue)
 			{
@@ -319,7 +333,7 @@ void pivotRight(int sec, int microsec, double speed)
 	set_motor(rightMotor, 0);
 }
 
-std::tuple<int, int> findMaxAndMin()
+std::pair<int, int> findMaxAndMin()
 {
 	//set the max and min values
 	int maximum = 0;
@@ -335,7 +349,7 @@ std::tuple<int, int> findMaxAndMin()
 		if(pix > maximum)
 			maximum = pix;
 	}
-	return std::make_tuple(maximum, minimum);
+	return std::pair<int, int>(maximum, minimum);
 }
 
 //calculates and returns the amount to turn
