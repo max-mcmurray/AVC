@@ -165,9 +165,9 @@ int noiseConstant = 50; // amount of leeway before the left sensor is no longer 
 double rotate180 = ; // amount of time (microsecs) the AV should turn for to get to 180 degrees
 int forwardAfterTurn = 100000; // amount of time (microsecs) the AV should continue travelling forward once it has made a turn
 
-int leftSensor = ; // the number ports that the wires are physically connected to
-int frontSensor = ;
-int rightSensor = ;
+int leftSensor = 0; // the number ports that the wires are physically connected to
+int frontSensor = 1;
+int rightSensor = 2;
 
 bool sideWallDetect = 0;
 
@@ -185,9 +185,9 @@ void navigateWalledMaze()
 		// if there is a path on the left
 		else if(adc_reading_left < wallThreshold & adc_reading_right > wallThreshold){ 
 			printf("Turning left.\n");
-			turnLeft(defaultSec, defaultMicroSec);
+			pivotLeft(defaultSec, defaultMicroSec);
 			sleep1(0, 100000);
-			while(sideWallDetect()){ // move forward until there is a wall on both sides
+			while(!sideWallDetect()){ // move forward until there is a wall on both sides
 				goForward(forwardAfterTurn);
 			}
 			goForward(100000);
@@ -195,7 +195,7 @@ void navigateWalledMaze()
 		// if there is no path to the left, but can go forward
 		else if(adc_reading_left > wallThreshold & adc_reading_front < frontThreshold){ 
 			printf("Going forward.\n");
-			while(sideWallDetect()){ // move forward until there is a wall on both sides
+			while(!sideWallDetect()){ // move forward until there is a wall on both sides
 				goForward(defaultMicroSec);
 			}
 			goForward(forwardAfterTurn);
@@ -203,9 +203,9 @@ void navigateWalledMaze()
 		// if there is a path on the right only
 		else if(adc_reading_left > wallThreshold & adc_reading_right < wallThreshold & adc_reading_front > frontThreshold)
 			printf("Turning right.\n");
-			turnRight(defaultSec, defaultMicroSec);
+			pivotRight(defaultSec, defaultMicroSec);
 			sleep1(0, 100000);
-			while(sideWallDetect()){ // move forward until there is a wall on both sides
+			while(!sideWallDetect()){ // move forward until there is a wall on both sides
 				goForward(defaultMicroSec);
 			}
 			goForward(forwardAfterTurn);
@@ -213,7 +213,10 @@ void navigateWalledMaze()
 	 	// if there are nearby walls on both sides and cannot go forward
 		else if(adc_reading_left > wallThreshold & adc_reading_right > wallThreshold & adc_reading_front > frontThreshold){
 			printf("Dead end detected! Turning around.\n");
-			turnRight(defaultSec, rotate180);
+			pivotRight(defaultSec);
+			sleep1(0, 100000);
+			pivotRight(defaultSec);
+			sleep(0, 100000);
 		}
 	}
  
@@ -224,12 +227,12 @@ void centreWallMaze(int adc_reading_left, int avc_reading_right)
 	if(adc_reading_left + noiseConstant < adc_reading_right){ // when AV is close to the left wall
 		printf("Too close to left wall!\n");
 		reverse(defaultSec, reverseMicroSec);
-		pivotRight(defaultSec, defaultMircoSec, insideWheelSpeed);
+		turnRight(defaultSec, defaultMircoSec, insideWheelSpeed);
 	}
 	else if(adc_reading_left > adc_reading_right + noiseConstant){ // when AV is close to the right wall
 		printf("Too close to right wall!\n");
 		reverse(defaultSec, reverseMicroSec);
-		pivotLeft(defaultSec, defaultMircoSec, insideWheelSpeed);
+		turnLeft(defaultSec, defaultMircoSec, insideWheelSpeed);
 	}
 	else{
 		goForward(defaultMicroSec); // if AV is centred, then continue going foward
