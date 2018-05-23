@@ -88,3 +88,16 @@
 - Printing out the parts to connect the sensors to the robot
 - Attaching the front sensor to the robot
 - Writing code so that the robot stops at the orange line
+
+### 22/05 
+
+- The sensors are being attached to the robot 
+- Testing the sensors
+
+### 23/05
+
+- Originally there were 3 sensors connected to the robot, all of which are long-range sensors. After testing them out, we reached the conclusion that the robot would need one long-range sensor in the front and two-range sensors on the sides in order to move through the maze. 
+- The new sensors have been attached to the robot and code for the maze is being tested
+- The robot is moving but continuously turns left and hits the wall 
+- We are currently stuck in a deep dark hole. Every member is feeling all types of confused. The problem is hard to identify. 
+- The plan is to add back sensors to the robot tomorrow and hope for the best
