@@ -31,17 +31,17 @@
 - [x] Penny: Document progress to date
 - [x] Max: Update GitHub with development and check over AV design
 - [x] Max: Write method to complete line maze
-- [ ] Toby, Ben: Add sensors to the AV build
-- [ ] Toby, Ben: Finish the AV build with all the required parts
-- [ ] Toby: Write method to complete walled maze
+- [x] Toby, Ben: Add sensors to the AV build
+- [x] Toby, Ben: Finish the AV build with all the required parts
+- [x] Toby: Write method to complete walled maze
 
 ### Week 4:
 
-- [ ] Josh: Ensure AV can complete course, finalise and optimise code
-- [ ] Penny: Assessing full team progress against expected results.
-- [ ] Penny: Implement necessary changes. Bug testing and debugging code
-- [ ] Max: Update GitHub with development and test AV thoroughly in maze
-- [ ] Toby, Ben: Make adjustments and finalise AV build
+- [x] Josh: Ensure AV can complete course, finalise and optimise code
+- [x] Penny: Assessing full team progress against expected results.
+- [x] Penny: Implement necessary changes. Bug testing and debugging code
+- [x] Max: Update GitHub with development and test AV thoroughly in maze
+- [x] Toby, Ben: Make adjustments and finalise AV build
 
 ### Week 5:
 
