@@ -101,3 +101,11 @@
 - The robot is moving but continuously turns left and hits the wall 
 - We are currently stuck in a deep dark hole. Every member is feeling all types of confused. The problem is hard to identify. 
 - The plan is to add back sensors to the robot tomorrow and hope for the best
+
+### 24/05
+
+- The plan was to add back sensors to the robot but today we decided to code without them
+- Code for Quadrant 4 is successful: minor tweaks have been made to speed so that the robot moves fast and efficiently through the maze
+- The full code has been tested on the maze multiple times and we have had many SUCCESSFUL attempts
+- The switch has been attached to the top of the robot 
+- THRASHER GOT US 100% YAY!
